@@ -19,7 +19,7 @@ class Student:
         """
         This method adds a grade to the grades list
         """
-        if g is not int:
+        if not isinstance(g, int):
             print("Error: Grade must be an integer")
             return
         self.grades.append(g)
@@ -44,16 +44,35 @@ class Student:
         """
         This method removes grade from list
         """
+        if len(self.grades) < index:
+            print("Error: Index out of range")
+            return
         del self.grades[index]
 
     def report(self):  # broken format
         """
         This method prints out all student information
         """
-        print("ID: " + self.id)
+        print("ID: " + str(self.id))
         print("Name is: " + self.name)
-        print("Grades Count: " + len(self.grades))
+        print("Grades Count: " + str(len(self.grades)))
         print("Final Grade = " + self.letter)
+
+    def calculate_letter(self):
+        """
+        This method calculates letter grade
+        """
+        avg = self.calc_average()
+        if avg >= 90:
+            self.letter = "A"
+        elif avg >= 80:
+            self.letter = "B"
+        elif avg >= 70:
+            self.letter = "C"
+        elif avg >= 60:
+            self.letter = "D"
+        else:
+            self.letter = "F"
 
 
 def start_run():
@@ -62,10 +81,11 @@ def start_run():
     """
     a = Student(1, "Nombre")
     a.add_grades(100)
-    a.add_grades("Fifty")  # broken
+    a.add_grades("Fifty")
     a.calc_average()
     a.check_honor()
-    a.delete_grade(5)  # IndexError
+    a.calculate_letter()
+    a.delete_grade(3)
     a.report()
 
 
