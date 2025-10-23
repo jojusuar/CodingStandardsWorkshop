@@ -8,6 +8,8 @@ class Student:
     This class stores basic student information
     """
     def __init__(self, student_id, name):
+        if not student_id or not name:
+            return
         self.id = student_id
         self.name = name
         self.grades = []
