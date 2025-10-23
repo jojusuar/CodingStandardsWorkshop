@@ -15,6 +15,9 @@ class Student:
             student_id (str): Unique ID for the student.
             name (str): Name of the student.
         """
+        if not (student_id and name):
+            print("ID and name must not be empty.")
+            return
         self.student_id = student_id
         self.name = name
         self.grades = []
@@ -103,12 +106,17 @@ class Student:
         print("Name is: " + self.name)
         print(f"Grades Count: {len(self.grades)}")
         print("Final Grade = " + self.letter)
+        print(f"Passed = {self.is_passed}")
+        print(f"In honor roll = {self.honor}")
 
 
 def start_run():
     """Runs a mock student test.
     """
     a = Student("x", "Test")
+    if not a:
+        print("Could not create the student.")
+        return
     a.add_grades(100)
     a.add_grades("Fifty")
     a.calc_average()
